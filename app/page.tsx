@@ -1,9 +1,11 @@
 "use client";
+import "../i18n"; // Ensure this is imported
+import { appWithTranslation } from "next-i18next";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function Home() {
+function Home() {
   const { status } = useSession();
   const router = useRouter();
 
@@ -41,3 +43,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default appWithTranslation(Home);
