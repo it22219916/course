@@ -12,7 +12,7 @@ export default function Home() {
     if (status === "authenticated") {
       return (
         <button
-          className="border border-solid border-black rounded"
+          className="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
           onClick={() => {
             signOut({ redirect: false }).then(() => {
               router.push("/");
@@ -57,14 +57,27 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          <div className="text-gray-500 dark:text-gray-400">
+            If you're a admin login{" "}
+            <span>
+              <Link
+                href={"/login"}
+                className="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline"
+              >
+                here
+              </Link>
+            </span>
+          </div>
         </>
       );
     }
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-xl">Home</h1>
-      {showSession()}
+    <main className="flex flex-col items-center justify-center">
+      <h1 className="mb-2 text-4xl mt-10">Home</h1>
+      <div className="flex flex-col justify-center min-h-screen">
+        {showSession()}
+      </div>
     </main>
   );
 }

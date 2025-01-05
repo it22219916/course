@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const AdminCoursePage = () => {
   const router = useRouter();
@@ -47,6 +48,14 @@ const AdminCoursePage = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-2xl font-bold mb-6">Admin Course Page</h1>
+      <div className="flex justify-end mb-4">
+        <Link
+          href="/admin/lesson/create"
+          className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+        >
+          Create New Lesson
+        </Link>
+      </div>
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <h2 className="text-xl font-semibold mb-4">Lessons</h2>
         <ul className="space-y-4">
