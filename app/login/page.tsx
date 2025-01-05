@@ -20,7 +20,7 @@ export default function Login() {
       setError(res.error as string);
     }
     if (res?.ok) {
-      return router.push("/");
+      return router.push("/course");
     }
   };
 
@@ -35,7 +35,7 @@ export default function Login() {
         <h1 className="mb-5 w-full text-2xl font-bold">Sign In</h1>
         <label className="w-full text-sm">EPF Number</label>
         <input
-          type="epf"
+          type="text"
           placeholder="EPF Number"
           className="w-full h-8 border border-solid border-black rounded p-2"
           name="epf"

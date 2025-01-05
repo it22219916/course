@@ -54,10 +54,10 @@ export default function Register() {
 
         <label className="w-full text-sm">EPF Number</label>
         <input
-          type="epf"
+          type="text"
           placeholder="EPF Number"
           className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
-          name="email"
+          name="epf"
         />
 
         <label className="w-full text-sm">Password</label>
