@@ -30,7 +30,8 @@ export async function GET(request: NextRequest, { params }: Params) {
 }
 
 // Handle PUT request: Update a lesson by ID
-export async function PUT(request: NextRequest, { params }: Params) {
+export async function PUT(request: NextRequest, context: Params) {
+  const { params } = await context;
   const { id } = await params;
 
   try {
