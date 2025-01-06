@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import VideoCard from "@/app/ui/video";
 import WordwallCard from "@/app/ui/wordwall";
 import { use } from "react";
