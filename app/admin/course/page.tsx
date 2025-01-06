@@ -16,9 +16,11 @@ const AdminCoursePage = () => {
 
   const [lessons, setLessons] = useState<Lesson[]>([]);
 
+  const apiUrl = process.env.API_URL;
+
   useEffect(() => {
     const fetchLessons = async () => {
-      const response = await fetch("/api/lessons");
+      const response = await fetch(`${apiUrl}/api/lessons`);
       const data = await response.json();
       setLessons(data);
     };
@@ -33,7 +35,7 @@ const AdminCoursePage = () => {
   const handleDelete = async (id: string) => {
     const confirmed = confirm("Are you sure you want to delete this lesson?");
     if (confirmed) {
-      const response = await fetch(`/api/lessons/${id}`, {
+      const response = await fetch(`${apiUrl}/api/lessons/${id}`, {
         method: "DELETE",
       });
 

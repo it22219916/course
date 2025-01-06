@@ -22,9 +22,11 @@ const UpdateLessonPage = ({ params }: { params: Promise<Params> }) => {
     sinhalaQuizUrl: "",
   });
 
+  const apiUrl = process.env.API_URL;
+
   useEffect(() => {
     const fetchLesson = async () => {
-      const response = await fetch(`/api/lessons/${id}`);
+      const response = await fetch(`${apiUrl}/api/lessons/${id}`);
       console.log("Lesson ID:", id);
 
       const data = await response.json();
@@ -55,7 +57,7 @@ const UpdateLessonPage = ({ params }: { params: Promise<Params> }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch(`/api/lessons/${id}`, {
+    const response = await fetch(`${apiUrl}/api/lessons/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

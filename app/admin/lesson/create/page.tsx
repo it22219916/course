@@ -49,7 +49,8 @@ const CreateLessonPage = () => {
         },
       }),
     };
-    const response = await fetch("/api/lessons", req);
+    const apiUrl = process.env.API_URL;
+    const response = await fetch(`${apiUrl}/api/lessons`, req);
 
     console.log(req.body);
 
