@@ -6,14 +6,17 @@ import type { NextRequest } from "next/server";
 // Connect to the database
 await connectDB();
 
-interface Params {
-  params: { id: string };
-}
-
 // Handle GET request: Fetch a single lesson by ID
-export async function GET(request: NextRequest, context: Params) {
-  const { params } = await context;
-  const { id } = await params;
+export async function GET(request: NextRequest) {
+  const { pathname } = request.nextUrl; // Get the pathname from the request URL
+  const id = pathname.split("/").pop(); // Extract the ID from the pathname
+
+  if (!id) {
+    return NextResponse.json(
+      { error: "ID is missing in the request" },
+      { status: 400 }
+    );
+  }
 
   try {
     const lesson = await Lesson.findById(id);
@@ -31,9 +34,16 @@ export async function GET(request: NextRequest, context: Params) {
 }
 
 // Handle PUT request: Update a lesson by ID
-export async function PUT(request: NextRequest, context: Params) {
-  const { params } = await context;
-  const { id } = await params;
+export async function PUT(request: NextRequest) {
+  const { pathname } = request.nextUrl; // Get the pathname from the request URL
+  const id = pathname.split("/").pop(); // Extract the ID from the pathname
+
+  if (!id) {
+    return NextResponse.json(
+      { error: "ID is missing in the request" },
+      { status: 400 }
+    );
+  }
 
   try {
     const body = await request.json();
@@ -52,9 +62,16 @@ export async function PUT(request: NextRequest, context: Params) {
 }
 
 // Handle DELETE request: Delete a lesson by ID
-export async function DELETE(request: NextRequest, context: Params) {
-  const { params } = await context;
-  const { id } = await params;
+export async function DELETE(request: NextRequest) {
+  const { pathname } = request.nextUrl; // Get the pathname from the request URL
+  const id = pathname.split("/").pop(); // Extract the ID from the pathname
+
+  if (!id) {
+    return NextResponse.json(
+      { error: "ID is missing in the request" },
+      { status: 400 }
+    );
+  }
 
   try {
     const lesson = await Lesson.findByIdAndDelete(id);
