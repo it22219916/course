@@ -20,10 +20,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: string };
+  params: any;
 }>) {
+  const { lang } = params;
   return (
     <html lang="en">
       <Provider>
