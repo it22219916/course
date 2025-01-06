@@ -29,11 +29,8 @@ export async function GET(
 }
 
 // Handle PUT request: Update a lesson by ID
-export async function PUT(
-  request: NextRequest,
-  context: { params: { id: string } }
-) {
-  const { id } = context.params;
+export async function PUT(request: NextRequest, params: { id: string }) {
+  const { id } = params;
 
   try {
     const body = await request.json();
