@@ -11,6 +11,7 @@ export async function GET() {
     const lessons = await Lesson.find({});
     return NextResponse.json(lessons, { status: 200 });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: "Failed to fetch lessons" },
       { status: 500 }
@@ -26,6 +27,7 @@ export async function POST(request: Request) {
     await lesson.save();
     return NextResponse.json(lesson, { status: 201 });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: "Failed to create lesson" },
       { status: 500 }

@@ -58,7 +58,7 @@ export default function Home() {
             </div>
           </div>
           <div className="text-gray-500 dark:text-gray-400">
-            If you're a admin login{" "}
+            If you&apos;re a admin login{" "}
             <span>
               <Link
                 href={"/login"}

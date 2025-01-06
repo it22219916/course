@@ -19,6 +19,7 @@ export async function GET(
     }
     return NextResponse.json(lesson, { status: 200 });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: "Failed to fetch lesson" },
       { status: 500 }
@@ -41,6 +42,7 @@ export async function PUT(
     }
     return NextResponse.json(lesson, { status: 200 });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: "Failed to update lesson" },
       { status: 500 }
@@ -65,6 +67,7 @@ export async function DELETE(
       { status: 200 }
     );
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: "Failed to delete lesson" },
       { status: 500 }

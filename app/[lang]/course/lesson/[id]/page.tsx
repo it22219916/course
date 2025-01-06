@@ -14,7 +14,6 @@ interface LessonPageProps {
 }
 
 const LessonPage: React.FC<LessonPageProps> = ({ params }) => {
-  const router = useRouter();
   const { id, lang } = use(params);
   interface Lesson {
     english: {
