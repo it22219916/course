@@ -12,7 +12,7 @@ interface Params {
 
 // Handle GET request: Fetch a single lesson by ID
 export async function GET(request: NextRequest, { params }: Params) {
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const lesson = await Lesson.findById(id);
@@ -31,7 +31,7 @@ export async function GET(request: NextRequest, { params }: Params) {
 
 // Handle PUT request: Update a lesson by ID
 export async function PUT(request: NextRequest, { params }: Params) {
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const body = await request.json();
@@ -51,7 +51,7 @@ export async function PUT(request: NextRequest, { params }: Params) {
 
 // Handle DELETE request: Delete a lesson by ID
 export async function DELETE(request: NextRequest, { params }: Params) {
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const lesson = await Lesson.findByIdAndDelete(id);
