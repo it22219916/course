@@ -6,9 +6,12 @@ import type { NextRequest } from "next/server";
 // Connect to the database
 await connectDB();
 
+interface Params {
+  params: { id: string };
+}
+
 // Handle GET request: Fetch a single lesson by ID
-export async function GET(request: NextRequest, context: any) {
-  const { params } = context;
+export async function GET(request: NextRequest, { params }: Params) {
   const { id } = params;
 
   try {
@@ -27,8 +30,7 @@ export async function GET(request: NextRequest, context: any) {
 }
 
 // Handle PUT request: Update a lesson by ID
-export async function PUT(request: NextRequest, context: any) {
-  const { params } = context;
+export async function PUT(request: NextRequest, { params }: Params) {
   const { id } = params;
 
   try {
@@ -48,8 +50,7 @@ export async function PUT(request: NextRequest, context: any) {
 }
 
 // Handle DELETE request: Delete a lesson by ID
-export async function DELETE(request: NextRequest, context: any) {
-  const { params } = context;
+export async function DELETE(request: NextRequest, { params }: Params) {
   const { id } = params;
 
   try {

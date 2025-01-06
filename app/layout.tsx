@@ -3,6 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Provider } from "./provider";
 
+interface Params {
+  lang: String;
+}
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -23,9 +27,8 @@ export default function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: any;
+  params: Params;
 }>) {
-  const { lang } = params;
   return (
     <html lang="en">
       <Provider>
