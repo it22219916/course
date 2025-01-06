@@ -11,7 +11,8 @@ interface Params {
 }
 
 // Handle GET request: Fetch a single lesson by ID
-export async function GET(request: NextRequest, { params }: Params) {
+export async function GET(request: NextRequest, context: Params) {
+  const { params } = await context;
   const { id } = await params;
 
   try {
@@ -51,7 +52,8 @@ export async function PUT(request: NextRequest, context: Params) {
 }
 
 // Handle DELETE request: Delete a lesson by ID
-export async function DELETE(request: NextRequest, { params }: Params) {
+export async function DELETE(request: NextRequest, context: Params) {
+  const { params } = await context;
   const { id } = await params;
 
   try {
