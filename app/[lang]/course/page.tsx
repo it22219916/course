@@ -31,7 +31,7 @@ const CoursePage: React.FC<PageProps> = ({ params }) => {
 
   useEffect(() => {
     const fetchLessons = async () => {
-      const response = await fetch(`${apiUrl}/api/lessons`);
+      const response = await fetch(`/api/lessons`);
       const data = await response.json();
       setLessons(data);
     };

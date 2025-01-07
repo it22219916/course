@@ -74,7 +74,6 @@ export default function Home() {
   };
   return (
     <main className="flex flex-col items-center justify-center">
-      <h1 className="mb-2 text-4xl mt-10">Home</h1>
       <div className="flex flex-col justify-center min-h-screen">
         {showSession()}
       </div>
