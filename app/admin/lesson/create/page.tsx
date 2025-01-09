@@ -27,6 +27,12 @@ const CreateLessonPage = () => {
     console.log(form);
   };
 
+  const changeUrlToPreview = (url: string): string => {
+    const urlParts = url.split("/");
+    urlParts[urlParts.length - 1] = "preview";
+    return urlParts.join("/");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const req = {
@@ -38,13 +44,13 @@ const CreateLessonPage = () => {
         english: {
           title: form.englishTitle,
           description: form.englishDescription,
-          videoUrl: form.englishVideoUrl,
+          videoUrl: await changeUrlToPreview(form.englishVideoUrl),
           quizUrl: form.englishQuizUrl,
         },
         sinhala: {
           title: form.sinhalaTitle,
           description: form.sinhalaDescription,
-          videoUrl: form.sinhalaVideoUrl,
+          videoUrl: await changeUrlToPreview(form.sinhalaVideoUrl),
           quizUrl: form.sinhalaQuizUrl,
         },
       }),
