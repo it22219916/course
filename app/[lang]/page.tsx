@@ -2,7 +2,6 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "@/app/ui/home.module.css";
-import { use } from "react";
 
 interface PageProps {
   params: Promise<{
