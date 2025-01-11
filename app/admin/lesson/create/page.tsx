@@ -61,7 +61,7 @@ const CreateLessonPage = () => {
     console.log(req.body);
 
     if (response.ok) {
-      router.push("/lessons");
+      router.push("/admin/course");
     } else {
       console.error("Failed to create lesson");
     }

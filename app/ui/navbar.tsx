@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 import Logo from "@/public/logo.png";
+import LanguageSwitcher from "@/app/ui/LanguageSwitcher";
+import { Icon } from "@iconify/react";
 
 const Navbar: React.FC = () => {
   const { status } = useSession();
@@ -49,9 +51,10 @@ const Navbar: React.FC = () => {
             </span>
           </Link>
           <div className="flex items-center lg:order-2">
-            {/* lang button */}
-
-            {/* login button */}
+            {/* Language Button */}
+            <Icon icon="tabler:language" className="text-primary-700 text-lg" />
+            <LanguageSwitcher />
+            {/* Login/Sign Out Button */}
             {showSession()}
             <button
               data-collapse-toggle="mobile-menu-2"
@@ -70,18 +73,6 @@ const Navbar: React.FC = () => {
                 <path
                   fillRule="evenodd"
                   d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <svg
-                className="hidden w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                   clipRule="evenodd"
                 />
               </svg>
@@ -109,6 +100,16 @@ const Navbar: React.FC = () => {
                   Course
                 </Link>
               </li>
+              {/* {data?.admin && (
+                <li>
+                  <Link
+                    href="/admin"
+                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Admin
+                  </Link>
+                </li>
+              )} */}
               <li>
                 <Link
                   href="#"

@@ -7,6 +7,7 @@ export interface UserDocument {
   password: string;
   name: string;
   phone: string;
+  admin: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -35,6 +36,10 @@ const UserSchema = new Schema<UserDocument>(
     name: {
       type: String,
       required: [true, "Name is required"],
+    },
+    admin: {
+      type: Boolean,
+      default: false,
     },
   },
   {
