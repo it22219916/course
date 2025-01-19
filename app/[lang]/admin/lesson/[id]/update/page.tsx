@@ -77,7 +77,7 @@ const UpdateLessonPage = ({ params }: { params: Promise<Params> }) => {
     });
 
     if (response.ok) {
-      router.push("/admin/course");
+      router.push("admin/course");
     } else {
       console.error("Failed to update lesson");
     }

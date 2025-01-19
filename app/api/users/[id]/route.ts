@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
-import Lesson from "@/models/Lesson";
+import User from "@/models/User";
 import { getToken } from "next-auth/jwt";
 import type { NextRequest } from "next/server";
 
@@ -18,32 +18,25 @@ async function verifyAdmin(request: NextRequest) {
   return { status: 200 };
 }
 
-// Handle GET request: Fetch a single lesson by ID (open to all users)
+// Handle GET request to fetch a specific user by ID
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.pathname.split("/").pop();
-  if (!id) {
-    return NextResponse.json(
-      { error: "ID is missing in the request" },
-      { status: 400 }
-    );
-  }
-
   try {
-    const lesson = await Lesson.findById(id);
-    if (!lesson) {
-      return NextResponse.json({ error: "Lesson not found" }, { status: 404 });
+    const user = await User.findById(id);
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
-    return NextResponse.json(lesson, { status: 200 });
+    return NextResponse.json(user, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Failed to fetch lesson" },
+      { error: "Failed to fetch user" },
       { status: 500 }
     );
   }
 }
 
-// Handle PUT request: Update a lesson by ID (admin only)
+// Handle PUT request to update a specific user by ID (requires admin verification)
 export async function PUT(request: NextRequest) {
   const adminCheck = await verifyAdmin(request);
   if (adminCheck.status !== 200) {
@@ -54,30 +47,24 @@ export async function PUT(request: NextRequest) {
   }
 
   const id = request.nextUrl.pathname.split("/").pop();
-  if (!id) {
-    return NextResponse.json(
-      { error: "ID is missing in the request" },
-      { status: 400 }
-    );
-  }
+  const body = await request.json();
 
   try {
-    const body = await request.json();
-    const lesson = await Lesson.findByIdAndUpdate(id, body, { new: true });
-    if (!lesson) {
-      return NextResponse.json({ error: "Lesson not found" }, { status: 404 });
+    const user = await User.findByIdAndUpdate(id, body, { new: true });
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
-    return NextResponse.json(lesson, { status: 200 });
+    return NextResponse.json(user, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Failed to update lesson" },
+      { error: "Failed to update user" },
       { status: 500 }
     );
   }
 }
 
-// Handle DELETE request: Delete a lesson by ID (admin only)
+// Handle DELETE request to delete a specific user by ID (requires admin verification)
 export async function DELETE(request: NextRequest) {
   const adminCheck = await verifyAdmin(request);
   if (adminCheck.status !== 200) {
@@ -88,26 +75,20 @@ export async function DELETE(request: NextRequest) {
   }
 
   const id = request.nextUrl.pathname.split("/").pop();
-  if (!id) {
-    return NextResponse.json(
-      { error: "ID is missing in the request" },
-      { status: 400 }
-    );
-  }
 
   try {
-    const lesson = await Lesson.findByIdAndDelete(id);
-    if (!lesson) {
-      return NextResponse.json({ error: "Lesson not found" }, { status: 404 });
+    const user = await User.findByIdAndDelete(id);
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
     return NextResponse.json(
-      { message: "Lesson deleted successfully" },
+      { message: "User deleted successfully" },
       { status: 200 }
     );
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Failed to delete lesson" },
+      { error: "Failed to delete user" },
       { status: 500 }
     );
   }

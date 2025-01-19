@@ -11,24 +11,27 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone(); // Clone the current URL for manipulation
   const pathname = request.nextUrl.pathname;
 
+  const lang = pathname.split("/")[1];
+
   // Condition 1: Redirect users not logged in trying to access /course or /admin
   if (
     !session &&
-    (pathname.startsWith("/course") || pathname.startsWith("/admin"))
+    (pathname.startsWith(`/${lang}/course`) ||
+      pathname.startsWith(`/${lang}/admin`))
   ) {
-    url.pathname = "/login";
+    url.pathname = `/${lang}/login`;
     return NextResponse.redirect(url);
   }
 
   // Condition 2: Redirect logged-in admins away from non-admin routes
-  if (session?.admin && !pathname.startsWith("/admin")) {
-    url.pathname = "/admin/course";
+  if (!session?.admin && pathname.startsWith(`/${lang}/admin`)) {
+    url.pathname = `/${lang}`;
     return NextResponse.redirect(url);
   }
 
   // Condition 3: Redirect logged-in non-admin users away from /login
-  if (session && !session.admin && pathname === "/login") {
-    url.pathname = "/course";
+  if (session && pathname === `/${lang}/login`) {
+    url.pathname = `/${lang}`;
     return NextResponse.redirect(url);
   }
 
@@ -38,5 +41,5 @@ export async function middleware(request: NextRequest) {
 
 // Define the paths where middleware should run
 export const config = {
-  matcher: ["/course/:path*", "/admin/:path*", "/login"],
+  matcher: ["/:lang/course/:path*", "/:lang/admin/:path*", "/:lang/login"],
 };

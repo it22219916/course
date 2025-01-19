@@ -21,7 +21,7 @@ export default function Register() {
       setError(r.error);
       return;
     } else {
-      return router.push("/login");
+      return router.push("./login");
     }
   };
 
@@ -78,7 +78,7 @@ export default function Register() {
         </button>
 
         <Link
-          href="/login"
+          href="./login"
           className="text-sm text-[#888] transition duration-150 ease hover:text-black"
         >
           Already have an account?

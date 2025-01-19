@@ -27,11 +27,37 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!passwordMatch) throw new Error("Wrong Password");
-        return user;
+
+        return {
+          id: user._id.toString(),
+          name: user.name,
+          email: user.email, // Optional, add if needed
+          admin: user.admin, // Assuming `admin` is a property on the user schema
+        };
       },
     }),
   ],
   session: {
     strategy: "jwt",
   },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        // Add user properties to the token
+        token.id = user.id;
+        token.admin = user.admin;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // Add token properties to the session
+      session.user = {
+        ...session.user,
+        id: token.id,
+        admin: token.admin,
+      };
+      return session;
+    },
+  },
+  secret: process.env.AUTH_SECRET,
 };

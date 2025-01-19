@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function Login() {
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -20,7 +20,7 @@ export default function Login() {
       setError(res.error as string);
     }
     if (res?.ok) {
-      return router.push("/admin/course");
+      router.push("./");
     }
   };
 
@@ -31,8 +31,12 @@ export default function Login() {
         border border-solid border-black bg-white rounded"
         onSubmit={handleSubmit}
       >
-        {error && <div className="text-black">{error}</div>}
         <h1 className="mb-5 w-full text-2xl font-bold">Sign In</h1>
+        {error && (
+          <div className="w-full p-3 mb-4 text-sm text-red-600 bg-red-100 border border-red-400 rounded">
+            {error}
+          </div>
+        )}
         <label className="w-full text-sm">EPF Number</label>
         <input
           type="text"
@@ -54,7 +58,7 @@ export default function Login() {
         </button>
 
         <Link
-          href="/register"
+          href="./register"
           className="text-sm text-[#888] transition duration-150 ease hover:text-black"
         >
           Don&apos;t have an account?

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
-import Lesson from "@/models/Lesson";
+import User from "@/models/User";
 import { getToken } from "next-auth/jwt";
 import type { NextRequest } from "next/server";
 
@@ -21,18 +21,18 @@ async function verifyAdmin(request: NextRequest) {
 // Handle GET requests (no admin verification needed here)
 export async function GET() {
   try {
-    const lessons = await Lesson.find({});
-    return NextResponse.json(lessons, { status: 200 });
+    const users = await User.find({});
+    return NextResponse.json(users, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Failed to fetch lessons" },
+      { error: "Failed to fetch users" },
       { status: 500 }
     );
   }
 }
 
-// Handle POST requests (requires admin)
+// Handle POST requests (requires admin verification)
 export async function POST(request: NextRequest) {
   const adminCheck = await verifyAdmin(request);
   if (adminCheck.status !== 200) {
@@ -44,13 +44,13 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const lesson = new Lesson(body);
-    await lesson.save();
-    return NextResponse.json(lesson, { status: 201 });
+    const user = new User(body);
+    await user.save();
+    return NextResponse.json(user, { status: 201 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Failed to create lesson" },
+      { error: "Failed to create user" },
       { status: 500 }
     );
   }
