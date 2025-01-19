@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 interface NavLink {
   name: string;
   path: string;
-  icon: String;
+  icon: string;
 }
 
 export const navData: NavLink[] = [
