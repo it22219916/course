@@ -19,14 +19,23 @@ async function verifyAdmin(request: NextRequest) {
 }
 
 // Handle GET requests (no admin verification needed here)
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const type = searchParams.get("type");
+
   try {
-    const users = await User.find({});
-    return NextResponse.json(users, { status: 200 });
+    if (type === "count") {
+      const userCount = await User.countDocuments({});
+      const adminCount = await User.countDocuments({ admin: true });
+      return NextResponse.json({ userCount, adminCount }, { status: 200 });
+    } else {
+      const users = await User.find({});
+      return NextResponse.json(users, { status: 200 });
+    }
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Failed to fetch users" },
+      { error: "Failed to fetch data" },
       { status: 500 }
     );
   }

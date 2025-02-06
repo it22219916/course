@@ -16,15 +16,21 @@ const AdminPage = () => {
 
   useEffect(() => {
     const fetchUserCount = async () => {
-      const response = await fetch(`/api/users`, {
-        method: "GET_COUNT",
+      const response = await fetch(`/api/users?type=count`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const data = await response.json();
-      setUserCount(data);
+
+      if (response.ok) {
+        const data = await response.json();
+        setUserCount(data);
+      } else {
+        console.error("Failed to fetch user count");
+      }
     };
+
     console.log("User Count:", userCount);
     fetchUserCount();
   }, []);
